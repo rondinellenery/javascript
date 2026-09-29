@@ -80,7 +80,99 @@ function valorBooleano() {
 
     if (valor1 === true && valor2 === true) {
         alert("Ambos os valores são VERDADEIROS.");
-    } else  (valor1 === false && valor2 === false) {
+    } else if (valor1 === false && valor2 === false) {
         alert("Ambos os valores são FALSOS.");
-    } 
+    } else {
+        alert("Os valores são diferentes.");
+    }
+}
+
+function lerVariaveis() {
+    let numero = Number(prompt("Digite um número:"));
+    let resultado;
+
+    if (numero % 2 === 0) {
+        resultado = numero + 5;
+        alert(`O número ${numero} é par. Resultado: ${resultado}`);
+    } else {
+        resultado = numero + 8;
+        alert(`O número ${numero} é ímpar. Resultado: ${resultado}`);
+    }
+}
+
+function ordenarDecrescente() {
+    let a = Number(prompt("Digite o primeiro valor:"));
+    let b = Number(prompt("Digite o segundo valor:"));
+    let c = Number(prompt("Digite o terceiro valor:"));
+
+    let numeros = [a, b, c].sort((x, y) => y - x);
+
+    alert(`Os valores em ordem decrescente são: ${numeros[0]}, ${numeros[1]}, ${numeros[2]}`);
+}
+
+function pesoIdeal() {
+    let genero = String(prompt("Digite o gênero (M/F):")).toUpperCase();
+    let altura = Number(prompt("Digite a altura em metros (ex.: 1.75):"));
+
+    let pesoIdeal;
+
+    if (genero === "M") {
+        pesoIdeal = (72.7 * altura) - 58;
+        alert(`O peso ideal para um homem com altura ${altura.toFixed(2)}m é ${pesoIdeal.toFixed(2)} kg.`);
+    } else if (genero === "F") {
+        pesoIdeal = (62.1 * altura) - 44.7;
+        alert(`O peso ideal para uma mulher com altura ${altura.toFixed(2)}m é ${pesoIdeal.toFixed(2)} kg.`);
+    } else {
+        alert("Gênero inválido. Use M ou F.");
+    }
+}
+
+function descobrirImc() {
+    let peso = Number(prompt("Digite o peso em kg:"));
+    let altura = Number(prompt("Digite a altura em metros (ex.: 1.75):"));
+
+    if (altura <= 0) {
+        alert("Altura inválida. Digite um valor maior que zero.");
+        return;
+    }
+
+    let imc = peso / (altura * altura);
+
+    if (imc < 18.5) {
+        alert(`Seu IMC é ${imc.toFixed(2)}. Você está abaixo do peso.`);
+    } else if (imc < 25) {
+        alert(`Seu IMC é ${imc.toFixed(2)}. Seu peso está normal.`);
+    } else if (imc < 30) {
+        alert(`Seu IMC é ${imc.toFixed(2)}. Você está em sobrepeso.`);
+    } else if (imc < 40) {
+        alert(`Seu IMC é ${imc.toFixed(2)}. Você está obeso.`);
+    } else {
+        alert(`Seu IMC é ${imc.toFixed(2)}. Você está em obesidade grave.`);
+    }
+}
+
+function verDesconto() {
+    let valorCompra = Number(prompt("Digite o valor da compra:"));
+
+    if (valorCompra >= 1000) {
+        let desconto = valorCompra * 0.10;
+        let totalComDesconto = valorCompra - desconto;
+        alert(`Compra: R$ ${valorCompra.toFixed(2)}\nDesconto: R$ ${desconto.toFixed(2)}\nTotal a pagar: R$ ${totalComDesconto.toFixed(2)}`);
+    } else {
+        alert(`Compra: R$ ${valorCompra.toFixed(2)}\nSem desconto. Total a pagar: R$ ${valorCompra.toFixed(2)}`);
+    }
+}
+
+function verificarMedia() {
+    let nota1 = Number(prompt("Digite a primeira nota:"));
+    let nota2 = Number(prompt("Digite a segunda nota:"));
+    let nota3 = Number(prompt("Digite a terceira nota:"));
+
+    let media = (nota1 + nota2 + nota3) / 3;
+
+    if (media >= 7) {
+        alert(`Média: ${media.toFixed(2)}\nAluno aprovado.`);
+    } else {
+        alert(`Média: ${media.toFixed(2)}\nAluno reprovado.`);
+    }
 }
