@@ -73,3 +73,14 @@ function valuePositivoNegativo() {
         alert(`O triplo de ${numero} é: ${triplo}`);
     }
 }
+
+function valorBooleano() {
+    let valor1 = Boolean(Number(prompt("Digite 1 para VERDADEIRO ou 0 para FALSO:")));
+    let valor2 = Boolean(Number(prompt("Digite 1 para VERDADEIRO ou 0 para FALSO:")));
+
+    if (valor1 === true && valor2 === true) {
+        alert("Ambos os valores são VERDADEIROS.");
+    } else  (valor1 === false && valor2 === false) {
+        alert("Ambos os valores são FALSOS.");
+    } 
+}
