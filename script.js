@@ -111,30 +111,42 @@ function ordenarDecrescente() {
 }
 
 function pesoIdeal() {
-    let genero = String(prompt("Digite o gênero (M/F):")).toUpperCase();
-    let altura = Number(prompt("Digite a altura em metros (ex.: 1.75):"));
+    let genero;
+
+    while (true) {
+        genero = String(prompt("Digite o gênero (M/F):")).trim().toUpperCase();
+
+        if (genero === "M" || genero === "F") {
+            break;
+        }
+
+        alert("Gênero inválido. Use apenas M ou F.");
+    }
+
+    let altura = parseFloat(prompt("Digite a altura em metros (ex.: 1.75):"));
+
+    if (isNaN(altura) || altura <= 0) {
+        alert("Altura inválida. Digite um valor maior que zero.");
+        return;
+    }
 
     let pesoIdeal;
 
-    if (genero === "M") {
-        pesoIdeal = (72.7 * altura) - 58;
-        alert(`O peso ideal para um homem com altura ${altura.toFixed(2)}m é ${pesoIdeal.toFixed(2)} kg.`);
-    } else if (genero === "F") {
-        pesoIdeal = (62.1 * altura) - 44.7;
-        alert(`O peso ideal para uma mulher com altura ${altura.toFixed(2)}m é ${pesoIdeal.toFixed(2)} kg.`);
-    } else {
-        alert("Gênero inválido. Use M ou F.");
+    switch (genero) {
+        case "M":
+            pesoIdeal = (72.7 * altura) - 58;
+            alert(`O peso ideal para um homem com altura ${altura.toFixed(2)} m é ${pesoIdeal.toFixed(2)} kg.`);
+            break;
+        case "F":
+            pesoIdeal = (62.1 * altura) - 44.7;
+            alert(`O peso ideal para uma mulher com altura ${altura.toFixed(2)} m é ${pesoIdeal.toFixed(2)} kg.`);
+            break;
     }
 }
 
 function descobrirImc() {
     let peso = Number(prompt("Digite o peso em kg:"));
     let altura = Number(prompt("Digite a altura em metros (ex.: 1.75):"));
-
-    if (altura <= 0) {
-        alert("Altura inválida. Digite um valor maior que zero.");
-        return;
-    }
 
     let imc = peso / (altura * altura);
 
@@ -143,11 +155,20 @@ function descobrirImc() {
     } else if (imc < 25) {
         alert(`Seu IMC é ${imc.toFixed(2)}. Seu peso está normal.`);
     } else if (imc < 30) {
-        alert(`Seu IMC é ${imc.toFixed(2)}. Você está em sobrepeso.`);
+        let pesoIdeal25 = 25 * (altura * altura);
+        let quilosParaFicarNoSobrepeso = peso - pesoIdeal25;
+
+        alert(`Seu IMC é ${imc.toFixed(2)}. Você está em sobrepeso. Para chegar ao limite do sobrepeso, você precisa perder ${quilosParaFicarNoSobrepeso.toFixed(2)} kg.`);
     } else if (imc < 40) {
-        alert(`Seu IMC é ${imc.toFixed(2)}. Você está obeso.`);
+        let pesoIdeal30 = 30 * (altura * altura);
+        let quilosParaChegarEm30 = peso - pesoIdeal30;
+
+        alert(`Seu IMC é ${imc.toFixed(2)}. Você está obeso. Para chegar em 30, você precisa perder ${quilosParaChegarEm30.toFixed(2)} kg.`);
     } else {
-        alert(`Seu IMC é ${imc.toFixed(2)}. Você está em obesidade grave.`);
+        let pesoIdeal30 = 30 * (altura * altura);
+        let quilosParaChegarEm30 = peso - pesoIdeal30;
+
+        alert(`Seu IMC é ${imc.toFixed(2)}. Você está em obesidade grave. Para chegar em 30, você precisa perder ${quilosParaChegarEm30.toFixed(2)} kg.`);
     }
 }
 
