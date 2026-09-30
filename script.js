@@ -173,27 +173,71 @@ function descobrirImc() {
 }
 
 function verDesconto() {
-    let valorCompra = Number(prompt("Digite o valor da compra:"));
+    let preco = Number(prompt("Digite o valor do produto:"));
+    let codigo = parseInt(prompt(`Digite o código do meio de pagamento:
+        1 - À vista em dinheiro ou cheque (10% de desconto)
+        2 - À vista no cartão de crédito (15% de desconto)
+        3 - Em duas vezes, preço normal de etiqueta sem juros
+        4 - Em duas vezes, preço normal de etiqueta com 10% de juros`));
 
-    if (valorCompra >= 1000) {
-        let desconto = valorCompra * 0.10;
-        let totalComDesconto = valorCompra - desconto;
-        alert(`Compra: R$ ${valorCompra.toFixed(2)}\nDesconto: R$ ${desconto.toFixed(2)}\nTotal a pagar: R$ ${totalComDesconto.toFixed(2)}`);
-    } else {
-        alert(`Compra: R$ ${valorCompra.toFixed(2)}\nSem desconto. Total a pagar: R$ ${valorCompra.toFixed(2)}`);
+    switch (codigo) {
+        case 1:
+            preco = preco * 0.9;
+            break;
+        case 2:
+            preco = preco * 0.85;
+            break;
+        case 3:
+            preco = preco;
+            break;
+        case 4:
+            preco = preco * 1.1;
+            break;
+        default:
+            alert("Código de pagamento inválido.");
+            return;
     }
+
+    alert(`O valor a pagar é: R$ ${preco.toFixed(2)}`);
 }
 
 function verificarMedia() {
-    let nota1 = Number(prompt("Digite a primeira nota:"));
-    let nota2 = Number(prompt("Digite a segunda nota:"));
-    let nota3 = Number(prompt("Digite a terceira nota:"));
-
-    let media = (nota1 + nota2 + nota3) / 3;
-
-    if (media >= 7) {
-        alert(`Média: ${media.toFixed(2)}\nAluno aprovado.`);
-    } else {
-        alert(`Média: ${media.toFixed(2)}\nAluno reprovado.`);
+    let numeroAluno = parseInt(prompt("Digite o número de identificação do aluno:"));
+    let nota1 = parseFloat(prompt("Digite a primeira nota:"));
+    let nota2 = parseFloat(prompt("Digite a segunda nota:"));
+    let nota3 = parseFloat(prompt("Digite a terceira nota:"));
+    let mediaExercicios = parseFloat(prompt("Digite a média dos exercícios:"));
+    let conceito;
+    const mediaAproveitamento = (nota1 + (nota2 * 2) + (nota3 * 3) + mediaExercicios) / 7;
+    switch (true) {
+        case (mediaAproveitamento >= 90):
+            conceito = 'A';
+            break;
+        case (mediaAproveitamento >= 75 && mediaAproveitamento < 90):
+            conceito = 'B';
+            break;
+        case (mediaAproveitamento >= 60 && mediaAproveitamento < 75):
+            conceito = 'C';
+            break;
+        case (mediaAproveitamento >= 40 && mediaAproveitamento < 60):
+            conceito = 'D';
+            break;
+        case (mediaAproveitamento < 40):
+            conceito = 'E';
+            break;
+        default:
+            alert(`Aluno: ${numeroAluno}\nMédia de Aproveitamento: ${mediaAproveitamento.toFixed(2)}\nConceito: E\nSituação: REPROVADO`);
+            return;
     }
+     let resultado = ['A', 'B', 'C'].includes(conceito) ? "Aprovado" : "Reprovado";
+
+        alert(`Aluno: ${numeroAluno}
+        Notas:
+        1º - verificação: ${nota1},
+        2º - verificação: ${nota2},
+        3º - verificação: ${nota3}
+        Média dos Exercícios: ${mediaExercicios}
+        Média de Aproveitamento: ${mediaAproveitamento.toFixed(2)}
+        Conceito: ${conceito}
+        Situação: ${resultado}`);
 }
